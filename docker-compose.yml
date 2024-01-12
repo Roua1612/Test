@@ -1,0 +1,27 @@
+version: "3"
+services:
+  api-server:
+    image: rafik609/rafikcinfo4app7
+    build: .
+    environment:
+      - NODE_ENV=production
+      - DB_URL=mongodb://mongo
+    ports:
+      - "9090:9090"
+    networks:
+      - app7
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo:5
+    ports:
+      - "9091:27017"
+    networks:
+      - app7
+    volumes:
+      - database:/data/db
+volumes:
+  database:
+
+networks:
+  app7:
